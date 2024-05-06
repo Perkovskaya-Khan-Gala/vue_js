@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <button @click="flipOver">{{buttonName}}</button>
+
+
+        <ul>
+            <li @click="visibleElements.splice(element.id,1)" v-for="element in visibleElements" :key="element.id">
+                {{element.name}}</li>
+
+
+            <li @click="showElement.splice(element.id,1)" v-for="element in showElement" :key="element.id">
+                <span v-if="element.flag">{{element.addedElement}}
+
+                </span>
+            </li>
+
+        </ul>
+        <button @click="addElement">Добавить</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        /*1. Создать кнопку "Перевернуть". При клике на кнопку текст кнопки должен перевернуться и отобразиться в обратном порядке.
+        2. Есть список элементов. Пользователь может добавлять новые элементы списка с текстом “Новый элемент списка” нажав на кнопку "Добавить".
+        3. *Дополнительное задание: При клике на элемент списка он должен быть удален. (по желанию)*/
+        const { createApp, ref } = Vue
+        createApp({
+            data() {
+                return {
+                    buttonName: "Перевернуть",
+                    visibleElements: [{
+                        id: 0,
+                        name: "Элемент 0",
+
+                    }, {
+                        id: 0,
+                        name: "Элемент 1",
+
+                    }, {
+                        id: 0,
+                        name: "Элемент 2",
+
+                    }, {
+                        id: 0,
+                        name: "Элемент 3",
+
+                    }, {
+                        id: 0,
+                        name: "Элемент 4",
+
+                    }],
+                    showElement: [{
+                        id: 0,
+                        addedElement: "Новый элемент списка",
+                        flag: false
+                    },
+                    {
+                        id: 1,
+                        addedElement: "Новый элемент списка",
+                        flag: false
+                    },
+                    {
+                        id: 2,
+                        addedElement: "Новый элемент списка",
+                        flag: false
+                    },
+                    {
+                        id: 3,
+                        addedElement: "Новый элемент списка",
+                        flag: false
+                    }],
+                    counter: 0
+
+                }
+            },
+            methods: {
+                flipOver() {
+                    this.buttonName = this.buttonName.split("").reverse().join("");
+
+                },
+                addElement() {
+                    this.showElement[this.counter].flag = true
+                    this.counter++;
+                },
+                removeElement() {
+
+
+                }
+
+            },
+            computed: {
+
+            }
+        }).mount('#app')
+
+    </script>
+</body>
+
+</html>
