@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <select v-model="type" :required @change="sort">
+            <option :selected>Сортировка</option>
+            <option>По возрастанию</option>
+            <option>По убыванию</option>
+        </select><br>
+
+        <button @click="sortProductsIncrease">Сортировка по убыванию</button>
+        <button @click="sortProductsDecrease">Сортировка по возрастанию</button>
+        <div v-for="product in products">
+            <h4>{{product.name}} - {{product.price}}</h4>
+        </div>
+
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        /*Вы разрабатываете приложение для отображения и сортировки списка товаров. 
+        У вас есть массив объектов products, где каждый объект представляет товар с его названием и ценой. 
+        Вам необходимо отобразить список товаров и предоставить пользователю 
+        возможность сортировать товары по цене (по возрастанию и по убыванию).*/
+        const { createApp } = Vue
+        createApp({
+            data() {
+                return {
+                    type: "Сортировка",
+                    products: [{
+                        name: "water",
+                        price: 120
+                    }, {
+                        name: "bread",
+                        price: 60
+                    }, {
+                        name: "butter",
+                        price: 160
+                    }, {
+                        name: "vine",
+                        price: 690
+                    }, {
+                        name: "milk",
+                        price: 85
+                    },]
+                }
+            },
+            methods: {
+                sort() {
+                    if (this.type === "По возрастанию") {
+                        this.products.sort((a, b) => {
+                            return a.price - b.price;
+                        });
+                    }
+                    if (this.type === "По убыванию") {
+                        this.products.sort((a, b) => {
+
+                            return b.price - a.price;
+                        });
+                    }
+                },
+                sortProductsDecrease() {
+                    this.products.sort((a, b) => {
+
+                        return a.price - b.price;
+                    });
+                },
+                sortProductsIncrease() {
+                    this.products.sort((a, b) => {
+
+                        return b.price - a.price;
+                    });
+                }
+
+
+            },
+            computed: {
+
+            }
+
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
